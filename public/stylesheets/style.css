@@ -1,0 +1,89 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Roboto+Slab:wght@100..900&display=swap");
+
+:root {
+	--priamry-color: #2d232e;
+	--secondary-color: #f7ef81;
+	--tertiary-color: #d36135;
+	--accent-colors: #de8f6e;
+	--purple-color: #731dd8;
+}
+
+body,
+html {
+	padding: 0px;
+	margin: 0px;
+}
+
+body {
+	font-family: "Oswald", sans-serif;
+	padding: auto;
+	background-color: var(--priamry-color);
+	color: white;
+	font-size: 30px;
+}
+
+a {
+	color: #00b7ff;
+}
+
+#wordform {
+	max-width: 1000px;
+	width: fit-content;
+	padding: 20px;
+	border-radius: 20px;
+	box-shadow: 5px 5px var(--purple-color);
+	border: var(--purple-color) 2px solid;
+	display: flex;
+	flex-direction: column;
+
+	background-color: var(--secondary-color);
+	align-items: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.tipscontainer {
+	margin: 10px auto;
+	display: flex;
+	width: fit-content;
+	flex-direction: column;
+	background-color: var(--tertiary-color);
+	align-items: center;
+	padding: 20px;
+}
+.tipscontainer > div {
+	display: flex;
+	flex-direction: column;
+}
+.wordcontainer {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	color: black;
+}
+.tipsInputFields {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+#wordform button {
+	width: 80%;
+	background-color: var(--purple-color);
+	color: white;
+	padding: 10px;
+	border-radius: 10px;
+}
+
+input {
+	min-width: 250px;
+	font-size: 30px;
+	padding: 2px;
+	border-radius: 20px;
+	text-align: center;
+}
+#wordform button:hover {
+	filter: brightness(80%);
+}
+#wordform button:active {
+	filter: brightness(60%);
+}

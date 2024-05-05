@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link rel="stylesheet" href="/stylesheets/style.css" />
+		<script src="/javascripts/index.js" defer></script>
+	</head>
+	<body>
+		<form action="/" method="post" id="wordform">
+			<div class="wordcontainer">
+				<label for="word">Word</label
+				><input type="text" placeholder="sityva..." name="word" />
+			</div>
+			<div class="tipscontainer">
+				<label for="tips">Tips</label>
+				<div class="tipsInputFields">
+					<input type="text" placeholder="minishneba..." name="tips" />
+					<input type="text" name="tips" />
+					<input type="text" name="tips" />
+					<input type="text" name="tips" />
+					<input type="text" name="tips" />
+				</div>
+			</div>
+			<button tpye="Submit">Submit</button>
+		</form>
+		<% if(alertMessage){%>
+		<script>
+			alert("Word has been added to database");
+		</script>
+		<% } %>
+	</body>
+</html>

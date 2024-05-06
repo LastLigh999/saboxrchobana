@@ -29,7 +29,7 @@ a {
 #wordform {
 	max-width: 1000px;
 	width: fit-content;
-	padding: 20px;
+	padding: 10px;
 	border-radius: 20px;
 	box-shadow: 5px 5px var(--purple-color);
 	border: var(--purple-color) 2px solid;
@@ -49,7 +49,8 @@ a {
 	flex-direction: column;
 	background-color: var(--tertiary-color);
 	align-items: center;
-	padding: 20px;
+	padding: 10px;
+	border-radius: 5px;
 }
 .tipscontainer > div {
 	display: flex;
@@ -75,8 +76,8 @@ a {
 }
 
 input {
-	min-width: 250px;
-	font-size: 30px;
+	width: auto;
+	font-size: 20px;
 	padding: 2px;
 	border-radius: 20px;
 	text-align: center;

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Saboxrchobana Prime</title>
+
+		<link rel="stylesheet" href="/stylesheets/style.css" />
+		<script>
+			window.word = <%- JSON.stringify(gameWord) %>;
+		</script>
+		<script src="/javascripts/index.js" defer></script>
+	</head>
+	<body>
+		<div id="game">
+			<h1 id="word"></h1>
+			<div id="tips"></div>
+			<form id="gameInput">
+				<input name="letter" maxlength="1" type="text" />
+				<button type="submit">Guess</button>
+			</form>
+			<div id="usedLetters"></div>
+		</div>
+	</body>
+</html>

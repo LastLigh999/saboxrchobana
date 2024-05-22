@@ -45,3 +45,15 @@ exports.createNewWordPost = async (req, res) => {
 		res.status(500).send(err.message);
 	}
 };
+
+exports.playGameGet = async (req, res) => {
+	try {
+		let word = await Word.aggregate([
+			{ $addFields: { tipsLength: { $size: "$tips" } } },
+			{ $match: { tipsLength: { $gte: 3 } } },
+			{ $project: { tipsLength: 0 } },
+			{ $sample: { size: 1 } },
+		]);
+		res.render("game", { gameWord: word[0] });
+	} catch (err) {}
+};

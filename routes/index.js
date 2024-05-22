@@ -7,6 +7,8 @@ const userController = require("../controller/userController");
 router.get("/", wordController.createNewWordGet);
 router.post("/", wordController.createNewWordPost);
 
+router.get("/play", wordController.playGameGet);
+
 router.get("*", (req, res) => {
 	res.redirect("/");
 });

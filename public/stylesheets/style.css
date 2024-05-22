@@ -20,6 +20,9 @@ body {
 	background-color: var(--priamry-color);
 	color: white;
 	font-size: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 a {
@@ -87,4 +90,19 @@ input {
 }
 #wordform button:active {
 	filter: brightness(60%);
+}
+#tips {
+	font-size: 30px;
+	background-color: var(--tertiary-color);
+	padding: 20px;
+}
+#gameInput {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+#gameInput > input {
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
 }

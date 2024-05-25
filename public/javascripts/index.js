@@ -18,7 +18,7 @@ function shuffleArray(array) {
 
 class HangedMan {
 	constructor(word, tipsDisplay, wordDisplay, usedLettersDisplay) {
-		this.word = word.originalword;
+		this.word = word.originalword.trim();
 		this.wordArr = this.word.toLowerCase().split("");
 		this.guessedLetters = new Array(this.wordArr.length).fill("_");
 		this.usedLetters = [];
@@ -26,9 +26,12 @@ class HangedMan {
 		this.tiporder = shuffleArray(
 			Array.from({ length: this.tips.length }, (_, i) => i)
 		);
+		this.mistakeCount = 0;
 		this.tipsDisplay = tipsDisplay;
 		this.wordDisplay = wordDisplay;
 		this.usedLettersDisplay = usedLettersDisplay;
+		this.removeSpaces();
+		this.displayTips();
 	}
 
 	displayGuessedLetters() {
@@ -46,6 +49,16 @@ class HangedMan {
 	updateUsedLetters() {
 		this.usedLettersDisplay.innerHTML = this.usedLetters.join(" ");
 	}
+	removeSpaces() {
+		if (this.wordArr.includes(" ")) {
+			for (let i = 0; i < this.wordArr.length; i++) {
+				if (this.wordArr[i] == " ") {
+					this.guessedLetters[i] = "&nbsp;";
+				}
+			}
+		}
+		this.displayGuessedLetters();
+	}
 	guessTheLetter(letter) {
 		letter = letter.toLowerCase();
 		if (this.usedLetters.includes(letter)) {
@@ -59,6 +72,15 @@ class HangedMan {
 				}
 			}
 			this.displayGuessedLetters();
+		} else {
+			this.mistakeCount++;
+			if (this.mistakeCount > 6) {
+				console.log("loop");
+				for (let i = 0; i < this.wordArr.length; i++) {
+					this.guessedLetters[i] = this.wordArr[i];
+				}
+			}
+			this.displayGuessedLetters();
 		}
 		this.usedLetters.push(letter);
 		this.updateUsedLetters();
@@ -67,6 +89,7 @@ class HangedMan {
 }
 
 const game = new HangedMan(window.word, gameTips, wordHtml, usedLettersDom);
+/* const test = gameContainer.querySelector("#testingstuff"); */
 
 inputForm.addEventListener("submit", (e) => {
 	e.preventDefault();
@@ -76,7 +99,4 @@ inputForm.addEventListener("submit", (e) => {
 
 console.log(game);
 
-game.displayGuessedLetters();
-
 console.log(gameTips);
-game.displayTips();

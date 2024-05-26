@@ -27,6 +27,7 @@ class HangedMan {
 			Array.from({ length: this.tips.length }, (_, i) => i)
 		);
 		this.mistakeCount = 0;
+		this.toWinLettersLeft = this.wordArr.length;
 		this.tipsDisplay = tipsDisplay;
 		this.wordDisplay = wordDisplay;
 		this.usedLettersDisplay = usedLettersDisplay;
@@ -54,6 +55,7 @@ class HangedMan {
 			for (let i = 0; i < this.wordArr.length; i++) {
 				if (this.wordArr[i] == " ") {
 					this.guessedLetters[i] = "&nbsp;";
+					this.toWinLettersLeft--;
 				}
 			}
 		}
@@ -69,22 +71,30 @@ class HangedMan {
 			for (let i = 0; i < this.wordArr.length; i++) {
 				if (this.wordArr[i] == letter) {
 					this.guessedLetters[i] = this.wordArr[i];
+					this.toWinLettersLeft--;
+					if (this.toWinLettersLeft <= 0) {
+						this.winTheGame();
+					}
 				}
 			}
 			this.displayGuessedLetters();
 		} else {
 			this.mistakeCount++;
 			if (this.mistakeCount > 6) {
-				console.log("loop");
 				for (let i = 0; i < this.wordArr.length; i++) {
 					this.guessedLetters[i] = this.wordArr[i];
 				}
+				setTimeout(this.winTheGame(), 5000);
 			}
 			this.displayGuessedLetters();
 		}
 		this.usedLetters.push(letter);
 		this.updateUsedLetters();
-		console.log(this.usedLetters);
+	}
+	winTheGame() {
+		setTimeout(() => {
+			location.reload();
+		}, 5000);
 	}
 }
 

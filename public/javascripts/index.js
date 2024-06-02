@@ -6,6 +6,12 @@ const gameTips = gameContainer.querySelector("#tips");
 //const inputForm = gameContainer.querySelector("#gameInput");
 const usedLettersDom = gameContainer.querySelector("#usedLetters");
 
+/* let audiotest = new Audio("../audio/winaudio.m4a");
+console.log(audiotest);
+document.addEventListener("click", (e) => {
+	audiotest.play();
+});
+ */
 function shuffleArray(array) {
 	for (var i = array.length - 1; i > 0; i--) {
 		var j = Math.floor(Math.random() * (i + 1));
@@ -31,6 +37,8 @@ class HangedMan {
 		this.tipsDisplay = tipsDisplay;
 		this.wordDisplay = wordDisplay;
 		this.usedLettersDisplay = usedLettersDisplay;
+		this.winAudio = new Audio("../audio/winaudio.m4a");
+		this.loseAudio = new Audio("../audio/loseaudio2.m4a");
 		this.removeSpaces();
 	}
 
@@ -63,6 +71,8 @@ class HangedMan {
 		this.displayGuessedLetters();
 	}
 	guessTheLetter(letter) {
+		/* 
+		this.winAudio.play(); */
 		letter = letter.toLowerCase();
 		if (this.usedLetters.includes(letter)) {
 			console.log("letter already has been used");
@@ -91,14 +101,21 @@ class HangedMan {
 				for (let i = 0; i < this.wordArr.length; i++) {
 					this.guessedLetters[i] = this.wordArr[i];
 				}
-				setTimeout(this.winTheGame(), 5000);
+				this.losetheGame();
 			}
 			this.displayGuessedLetters();
 		}
 		this.usedLetters.push(letter);
 		this.updateUsedLetters();
 	}
+	losetheGame() {
+		this.loseAudio.play();
+		setTimeout(() => {
+			location.reload();
+		}, 10000);
+	}
 	winTheGame() {
+		this.winAudio.play();
 		setTimeout(() => {
 			location.reload();
 		}, 5000);

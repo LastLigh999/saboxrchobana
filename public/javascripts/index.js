@@ -3,7 +3,7 @@ console.log(window.word);
 const gameContainer = document.querySelector("#game");
 const wordHtml = gameContainer.querySelector("#word");
 const gameTips = gameContainer.querySelector("#tips");
-const inputForm = gameContainer.querySelector("#gameInput");
+//const inputForm = gameContainer.querySelector("#gameInput");
 const usedLettersDom = gameContainer.querySelector("#usedLetters");
 
 function shuffleArray(array) {
@@ -32,18 +32,18 @@ class HangedMan {
 		this.wordDisplay = wordDisplay;
 		this.usedLettersDisplay = usedLettersDisplay;
 		this.removeSpaces();
-		this.displayTips();
 	}
 
 	displayGuessedLetters() {
 		this.wordDisplay.innerHTML = this.guessedLetters.join(" ");
 	}
 
-	displayTips() {
-		for (let i = 0; i < this.tiporder.length; i++) {
+	displayTips(loopCount) {
+		for (let i = 0; i < loopCount; i++) {
 			let tip = document.createElement("div");
 			console.log("tips");
-			tip.innerHTML = this.tips[this.tiporder[i]];
+			tip.innerHTML = this.tips[this.tiporder[0]];
+			this.tiporder.shift();
 			this.tipsDisplay.appendChild(tip);
 		}
 	}
@@ -59,6 +59,7 @@ class HangedMan {
 				}
 			}
 		}
+		this.displayTips(3);
 		this.displayGuessedLetters();
 	}
 	guessTheLetter(letter) {
@@ -80,6 +81,12 @@ class HangedMan {
 			this.displayGuessedLetters();
 		} else {
 			this.mistakeCount++;
+			if (this.mistakeCount == 3) {
+				this.displayTips(1);
+			}
+			if (this.mistakeCount == 6) {
+				this.displayTips(1);
+			}
 			if (this.mistakeCount > 6) {
 				for (let i = 0; i < this.wordArr.length; i++) {
 					this.guessedLetters[i] = this.wordArr[i];
@@ -101,12 +108,23 @@ class HangedMan {
 const game = new HangedMan(window.word, gameTips, wordHtml, usedLettersDom);
 /* const test = gameContainer.querySelector("#testingstuff"); */
 
-inputForm.addEventListener("submit", (e) => {
+/* inputForm.addEventListener("submit", (e) => {
 	e.preventDefault();
 	game.guessTheLetter(e.target.letter.value);
 	e.target.letter.value = "";
-});
+}); */
 
-console.log(game);
-
-console.log(gameTips);
+const input = gameContainer.querySelectorAll(".characterRow");
+for (let element of input) {
+	for (let ele of element.children) {
+		ele.dataset.used = 0;
+		ele.dataset.letter = ele.innerHTML;
+		ele.addEventListener("click", (e) => {
+			if (e.target.dataset.used == 0) {
+				e.target.dataset.used = 1;
+				e.target.innerHTML = "&nbsp;";
+				game.guessTheLetter(e.target.dataset.letter);
+			}
+		});
+	}
+}

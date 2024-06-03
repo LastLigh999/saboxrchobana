@@ -54,10 +54,10 @@ class HangedMan {
 			this.tiporder.shift();
 			this.tipsDisplay.appendChild(tip);
 		}
-	}
+	} /* 
 	updateUsedLetters() {
 		this.usedLettersDisplay.innerHTML = this.usedLetters.join(" ");
-	}
+	} */
 	removeSpaces() {
 		if (this.wordArr.includes(" ")) {
 			for (let i = 0; i < this.wordArr.length; i++) {
@@ -78,6 +78,7 @@ class HangedMan {
 			console.log("letter already has been used");
 			return;
 		}
+		let iscorrect = false;
 		if (this.wordArr.includes(letter)) {
 			for (let i = 0; i < this.wordArr.length; i++) {
 				if (this.wordArr[i] == letter) {
@@ -89,6 +90,7 @@ class HangedMan {
 				}
 			}
 			this.displayGuessedLetters();
+			iscorrect = true;
 		} else {
 			this.mistakeCount++;
 			if (this.mistakeCount == 3) {
@@ -105,8 +107,9 @@ class HangedMan {
 			}
 			this.displayGuessedLetters();
 		}
-		this.usedLetters.push(letter);
-		this.updateUsedLetters();
+		this.usedLetters.push(letter); /* 
+		this.updateUsedLetters(); */
+		return iscorrect;
 	}
 	losetheGame() {
 		this.loseAudio.play();
@@ -138,9 +141,15 @@ for (let element of input) {
 		ele.dataset.letter = ele.innerHTML;
 		ele.addEventListener("click", (e) => {
 			if (e.target.dataset.used == 0) {
-				e.target.dataset.used = 1;
-				e.target.innerHTML = "&nbsp;";
-				game.guessTheLetter(e.target.dataset.letter);
+				e.target.dataset.used = 1; /* 
+				e.target.innerHTML = "&nbsp;"; */
+
+				let result = game.guessTheLetter(e.target.dataset.letter);
+				if (result) {
+					e.target.style.color = "green";
+				} else {
+					e.target.style.color = "red";
+				}
 			}
 		});
 	}

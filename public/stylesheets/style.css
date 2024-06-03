@@ -111,7 +111,7 @@ input {
 	background-color: rgba(0, 0, 0, 0.3);
 	padding: 5px 20px;
 }
-#gameInput {
+/* #gameInput {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -128,7 +128,7 @@ input {
 	height: 40px;
 	background-color: var(--purple-color);
 	border-radius: 30px;
-}
+} */
 #input {
 	display: flex;
 	flex-direction: column;
